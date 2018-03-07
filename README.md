@@ -28,7 +28,7 @@ Design, styling and functionality of our dashboard will be achieved through boot
 ### Questions to answer
 * #### The end user will be able to analyze the following:
 
-    * GDP per capita and income inequality seen through the gini coefficient
+    * GDP per capita and income inequality seen through the gini coefficient.
     * Homicide rates and the cost of living index seen through grocery costs.
 
 <hr>
