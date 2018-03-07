@@ -1,3 +1,11 @@
+// Grabbing our GeoJSON data..
+//d3.json(link, function(data) {
+//  // Creating a GeoJSON layer with the retrieved data
+//  L.geoJson(data).addTo(map);
+//});
+
+
+
 // Create map object 
 var map = L.map("map", {
     center: [0, 0],
@@ -137,6 +145,14 @@ d3.json(link, function(data){
 
     });
 
+borderslink = "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json";        
+// Grabbing our GeoJSON data..
+d3.json(borderslink, function(data) {
+  var bordersLayer = L.geoJson(data, {
+    }).addTo(map);
+    controlLayers.addOverlay(bordersLayer, 'borders');
+});
+  
 // add plate layer
 d3.json(plates_link, function(data) {
     // Creating a GeoJSON layer with the retrieved data
@@ -147,7 +163,7 @@ d3.json(plates_link, function(data) {
     }).addTo(map);
     controlLayers.addOverlay(plateLayer, "Fault Lines");
         
-   
+
 
 // Setting up the legend
 var legend = L.control({position: 'bottomleft'});
