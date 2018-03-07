@@ -11,7 +11,7 @@
 
 ### Objective:
 
-Our goal for this project is to make an interactive dashboard that displays development data pulled from the following sources:
+Our goal for this project is to make an interactive dashboard that displays world development data pulled from the following sources:
 
 * [WHO](http://www.who.int/en/)
 * [IMF](http://www.imf.org/external/index.htm)
@@ -21,7 +21,7 @@ Our dashboard will have <b>three dynamic visualizations</b> using d3, plotly and
 
 Our data will be stored in a SQLite database and our website will be deployed through a Python Flask App. 
 
-Design, styling and functionality of our dashboard will be achieved through bootstrap, html/css and javascript. 
+Design, styling and functionality of our dashboard will be achieved through bootstrap, html/css and javascript.
 
 <hr>
 
