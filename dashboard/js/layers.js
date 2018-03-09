@@ -8,8 +8,8 @@
 
 // Create map object 
 var map = L.map("map", {
-    center: [0, 0],
-    zoom: 3
+    center: [20, 40],
+    zoom: 2
 
 });
 
@@ -44,80 +44,82 @@ var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.g
 
 var plates_link = "../json/plates.json"
 
+// L.control({position: 'bottomleft'});
+
 var controlLayers = L.control.layers(baseMaps).addTo(map);
 
 
- function styleInfo(feature){
-     return{
-     fillOpacity: 0.80,
-     color: getColor(feature.properties.mag),
-     radius: getRadius(feature.properties.mag),
-     stroke: true,
-     //border: true,
-     weight: 0.5
-    };
- };
+// function styleInfo(feature){
+//     return{
+//     fillOpacity: 0.80,
+//     color: getColor(feature.properties.mag),
+//     radius: getRadius(feature.properties.mag),
+//     stroke: true,
+//     //border: true,
+//     weight: 0.5
+//    };
+// };
 
- function getColor(magnitude){
-    switch(true) {
-        case magnitude > 5:
-        return "#DC143C"; // crimson
-        case magnitude > 4:
-        return "#FFFF00"; // yellow
-        case magnitude > 3:
-        return "#00CED1"; // darkturquoise
-        case magnitude > 2:
-        return "#9400D3"; // darkviolet
-        case magnitude > 1:
-        return "#1E90FF"; // dodgerblue
-        default:
-        return "#B0E0E6"; // powderblue
-    }
-};
+// function getColor(magnitude){
+//    switch(true) {
+//        case magnitude > 5:
+//        return "#DC143C"; // crimson
+//        case magnitude > 4:
+//        return "#FFFF00"; // yellow
+//        case magnitude > 3:
+//        return "#00CED1"; // darkturquoise
+//        case magnitude > 2:
+//        return "#9400D3"; // darkviolet
+//        case magnitude > 1:
+//        return "#1E90FF"; // dodgerblue
+//        default:
+//        return "#B0E0E6"; // powderblue
+//    }
+//};
 
 
 // function get Radius
 
- function getRadius(magnitude){
-    switch(true) {
-        case magnitude > 5:
-        return 20;
-        case magnitude > 4:
-        return 13;
-        case magnitude > 3:
-        return 10;
-        case magnitude > 2:
-        return 7;
-        case magnitude > 1:
-        return 6;
-        default:
-        return 5;
-    }
-};
+// function getRadius(magnitude){
+//    switch(true) {
+//        case magnitude > 5:
+//        return 20;
+//        case magnitude > 4:
+//        return 13;
+//        case magnitude > 3:
+//        return 10;
+//        case magnitude > 2:
+//        return 7;
+//        case magnitude > 1:
+//        return 6;
+//        default:
+//        return 5;
+//    }
+//};
 
 
 //create a function: populateInfo to add data
-function populateInfo(feature, layer) {
-    layer.bindPopup("<h1 class='infoHeader'>Weekly Earthquake Data</h1> \
-    <p class='description'>" + "Location: " + feature.properties.place + "</p>\
-    <p class='description'>" + "Magnitude: " + feature.properties.mag + "</p>");
-        
-};
+//function populateInfo(feature, layer) {
+//    layer.bindPopup("<h1 class='infoHeader'>Weekly Earthquake Data</h1> \
+//    <p class='description'>" + "Location: " + feature.properties.place + "</p>\
+//    <p class='description'>" + "Magnitude: " + feature.properties.mag + "</p>");
+//        
+//};
 
 // function for plate color
-function colorPlates(feature){
-    return{
-        color: "#FFA500",
-        fillOpacity: 0.05
-    };
-};
+//function colorPlates(feature){
+//    return{
+//        color: "#FFA500",
+//        fillOpacity: 0.05
+//    };
+//};
 
 // function for plate popup
-function popPlate(feature, layer) {
-    layer.bindPopup("<h1 class='infoHeader'>Tectonic Plate:</h1> \
-<p class='plate'>" + feature.properties.PlateName + "</p>");
-        
-};
+//function popPlate(feature, layer) {
+//    layer.bindPopup("<h1 class='infoHeader'>Tectonic Plate:</h1> \
+//<p class='plate'>" + feature.properties.PlateName + "</p>");
+//        
+//};
 
 // Here we add a GeoJSON layer to the map once the file is loaded.
 //d3.json(link, function(data){
@@ -164,22 +166,22 @@ d3.json(borderslink, function(data) {
 
 
 // Setting up the legend
-var legend = L.control({position: 'bottomleft'});
-legend.onAdd = function (map) {
-
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 1, 2, 3, 4, 5],
-        labels = [];
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
-
-    return div;
-};
+//var legend = L.control({position: 'bottomleft'});
+//legend.onAdd = function (map) {
+//
+//    var div = L.DomUtil.create('div', 'info legend'),
+//        grades = [0, 1, 2, 3, 4, 5],
+//        labels = [];
+//
+//    // loop through our density intervals and generate a label with a colored square for each interval
+//    for (var i = 0; i < grades.length; i++) {
+//        div.innerHTML +=
+//            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+//            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+//    }
+//
+//    return div;
+//};
 
 legend.addTo(map);
 
