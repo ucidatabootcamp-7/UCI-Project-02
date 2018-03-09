@@ -183,6 +183,6 @@ d3.json(borderslink, function(data) {
 //    return div;
 //};
 
-legend.addTo(map);
+//legend.addTo(map);
 
 //});

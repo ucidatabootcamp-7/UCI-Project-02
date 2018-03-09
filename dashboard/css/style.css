@@ -1,35 +1,44 @@
 /* remove default margin and padding from body */
 body {
-    padding: 0;
-    margin: 0;
+	padding-top: 40px;
+	height: 100%;
 }
-  
-  /* set map, body, and html to 100% of the screen size */
-  #map,
-  body,
-  html {
-    height: 100%;
-    width: 100%;
-    font-family: "Roboto"
+
+html {
+	height: 100%;
+}
+/* set map, body, and html to 100% of the screen size */
+
+#map-container {
+    margin-top: 40px ;
+	height: 100%;
+	width: 60%;
+}
+
+#map {
+	width: 100%;
+	position: inherit;
+	height: 600px;
+	margin:0;
+	padding:0;
+	border: 1px solid black;
+	/*border-radius: 8px;*/
 }
 
 .infoHeader {
     color: black;
-    font-family: "Roboto";
     font-size: 16px;
     text-align: center;
 }
 
 .description {
     color: black;
-    font-family: "Roboto";
     font-size: 12px;
     text-align: center;
 }
 
 .plate {
     color: black;
-    font-family: "Roboto";
     font-size: 16px;
     text-align: center;
 }
