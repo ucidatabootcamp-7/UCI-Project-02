@@ -42,11 +42,12 @@ var baseMaps = {
 // earthquakes all week data
 var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
 
-var plates_link = "../json/plates.json"
+// var plates_link = "../json/plates.json"
 
 // L.control({position: 'bottomleft'});
 
 var controlLayers = L.control.layers(baseMaps).addTo(map);
+
 
 
 // function styleInfo(feature){
@@ -98,7 +99,7 @@ var controlLayers = L.control.layers(baseMaps).addTo(map);
 //};
 
 
-//create a function: populateInfo to add data
+// Create a function to populate the pop up information
 //function populateInfo(feature, layer) {
 //    layer.bindPopup("<h1 class='infoHeader'>Weekly Earthquake Data</h1> \
 //    <p class='description'>" + "Location: " + feature.properties.place + "</p>\
@@ -139,10 +140,14 @@ var controlLayers = L.control.layers(baseMaps).addTo(map);
 //
 //    });
 
+// Create the country borders
+
 borderslink = "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json";        
+
 // Grabbing our GeoJSON data..
 d3.json(borderslink, function(data) {
   var bordersLayer = L.geoJson(data, {
+    onEachFeature: borderInfo,
     style: {
       // Border color
       color: "#fff",
@@ -151,8 +156,14 @@ d3.json(borderslink, function(data) {
     },
     }).addTo(map);
     controlLayers.addOverlay(bordersLayer, 'Country Borders');
+
 });
-  
+
+function borderInfo(feature, layer) {
+    layer.bindPopup("<h3 class='infoHeader'>Country:</h1> \
+<p class='plate'>" + feature.properties.name + "</p>");
+}
+
 // add plate layer
 //d3.json(plates_link, function(data) {
 //    // Creating a GeoJSON layer with the retrieved data
