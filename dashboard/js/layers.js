@@ -16,7 +16,7 @@ var map = L.map("map", {
 // add api key to variable 
 var apiKey = "access_token=pk.eyJ1IjoiYWJmZGF0YSIsImEiOiJjamU2aHlrZTgwMGdxMzNxa3R3OG5wZmNkIn0._No3joCSQ0ZhN2KE30LC8w";
 
-// Add default layer
+// Add default layer - Dark Map layer
 L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?" + apiKey).addTo(map);
 
 // Outdoors - default map
@@ -27,7 +27,7 @@ var outdoors = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10
 var satellite = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?" + apiKey,
 {id: 'map'});
 
-// dark map
+// Dark map - default map
 var dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?" + apiKey,
 {id: 'map'});
 
