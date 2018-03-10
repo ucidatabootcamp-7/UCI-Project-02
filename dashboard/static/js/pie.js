@@ -1,3 +1,5 @@
+console.log("1");
+
 // Define SVG area dimensions
 var svgWidth = 960;
 var svgHeight = 500;
@@ -16,7 +18,7 @@ var chartHeight = svgHeight - margin.top - margin.bottom;
 
 // Select body, append SVG area to it, and set the dimensions
 var svg = d3
-  .select("body")
+  .select("piechart")
     .append("svg")
       .attr("width", svgWidth)
       .attr("height", svgHeight)
@@ -25,13 +27,13 @@ var svg = d3
       .attr("transform", "translate(" + chartWidth / 2 + ", " + chartHeight / 2 + ")");
 
 // Load data from gdp_hdi.csv
-d3.csv("data/gdp_hdi.csv", function(error, gdpData) {
-
+d3.csv("gdp_hdi.csv", function(data) {
+  
   // If the browser encounters error in retrieving the file, generate an error message
-  if (error) throw error;
+  //if (error) throw error;
 
   // Print the gdpData
-  console.log(gdpData);
+  // console.log(gdpData);
 
   // Cast the GDPPPP value to a number
   // gdpData.forEach(function(data) {
