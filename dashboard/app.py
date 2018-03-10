@@ -21,7 +21,7 @@ pymysql.install_as_MySQLdb()
 from flask import Flask, jsonify, render_template
 
 # database set up
-engine = create_engine("sqlite:///sql/world_dev.sqlite")
+engine = create_engine("sqlite:///static/sql/world_dev.sqlite")
 conn = engine.connect()
 
 # refelct an existing database into a new model
