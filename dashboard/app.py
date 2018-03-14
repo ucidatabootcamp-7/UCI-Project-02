@@ -102,7 +102,7 @@ def country_metadata(country):
            WorldDev.Unemployment2016, WorldDev.Unemployment2017]
 
     results = session.query(*sel).\
-        filter(WorldDev.CountryName == country).all()
+        filter(WorldDev.IsoCode == country).all()
 
     # Create a dictionary entry for each row of metadata information
     sample_metadata = {}
