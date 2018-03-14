@@ -75,18 +75,9 @@ def metadata():
     
     # s = select([WorldDev.CountryName, WorldDev.GDP_PPP,WorldDev.HDI, WorldDev.LifeExpectancy])
     # results = conn.execute(s)
-
     results = session.query(*sel).all()
-
-    sample_metadata = {}
-    for result in results:
-        
-        sample_metadata['CountryName'] = result[0]
-        sample_metadata['GDP_PPP'] = result[1]
-        sample_metadata['HDI'] = result[2]
-        sample_metadata['LifeExpectancy'] = result[3]
-        
-        return jsonify(sample_metadata)
+    result_dict = [u._asdict() for u in results]
+    return jsonify(result_dict)
 
 
 # Allows us to filter metadata by country

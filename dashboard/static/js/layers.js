@@ -65,21 +65,20 @@ function borderInfo(feature, layer) {
           // Pass the country code over to a function
           //console.log(event.target.feature.id)
           console.log(event.target.feature);
-          var test = passCountryId(event.target.feature);
-          data = test[0];
-          layout = test[1];
-          
-          Plotly.newPlot('pie-chart', data, layout);
+          var pieChart = createPieChart(event.target.feature);
+          var lineChart = createLineChart(event.target.feature);
+          Plotly.newPlot('pie-chart', pieChart[0], pieChart[1]);
+          Plotly.newPlot('line-chart', lineChart[0], lineChart[1]);
         }
       });
     layer.bindPopup("<h3 class='infoHeader'>Country:</h1> \
 <p class='plate'>" + feature.properties.name + "</p>");
 }
 
-function passCountryId(country) {
+function createPieChart(country) {
   var countryId = country.id;
   var countryName = country.properties.name;
-  var mainLayout = [];
+  var pieMainLayout = [];
   console.log(countryName);
   console.log(countryId);
   var data = [{
@@ -94,6 +93,12 @@ function passCountryId(country) {
   }];
 
   var layout = {
+    title: `${countryName} GDP Compositon`,
+    font:{
+        family: "Arial",
+        size: 14,
+        color:'rgb(255, 255, 255)'
+      },
     legend:{
       x:20,
       y:0,
@@ -103,23 +108,6 @@ function passCountryId(country) {
         color:'rgb(255, 255, 255)'
       }
     },
-    annotations:[
-      {
-      xref: 'paper',
-      yref: 'paper',
-      x: 0.0,
-      y: 0.9,
-      xanchor: 'left',
-      yanchor: 'bottom',
-      text: `${countryName} GDP Composition`,
-      font:{
-          family: 'Arial',
-          size: 16,
-          color: 'rgb(255, 255, 255)'
-      },
-      showarrow: false
-      }
-    ],
       autosize: false,
     width: 400,
     height: 300,
@@ -133,9 +121,82 @@ function passCountryId(country) {
       pad: 1
     }
   };
-  mainLayout.push(data);
-  mainLayout.push(layout);
-  return(mainLayout);
+  pieMainLayout.push(data);
+  pieMainLayout.push(layout);
+  return(pieMainLayout);
+}
+
+function createLineChart(country) {
+    var countryId = country.id;
+    var countryName = country.properties.name;
+    var lineMainLayout = [];
+    var trace1 = {
+    x: [1, 2, 3, 4],
+    y: [10, 15, 13, 17],
+    type: 'scatter',
+    marker: {
+      color: 'rgb(12, 206, 18)',
+      size: 12,
+      line: {
+        color: '#fff',
+        width: 0.5
+      }
+    }
+  };
+
+  var trace2 = {
+    x: [1, 2, 3, 4],
+    y: [16, 5, 11, 9],
+    type: 'scatter',
+    marker: {
+      color: 'rgb(229, 73, 76)',
+      size: 12,
+      line: {
+        color: '#fff',
+        width: 0.5
+      }
+    }
+  };
+
+  var data = [trace1, trace2];
+
+  var layout = {
+    title: `${countryName} Population Change`,
+    font:{
+          family: 'Arial',
+          size: 16,
+          color: 'rgb(255, 255, 255)'
+    },
+    paper_bgcolor: '#1a1a1a',
+    plot_bgcolor: '#1a1a1a',
+    xaxis: {
+      showgrid: true,
+      showline: true,
+      gridcolor: '#bdbdbd',
+      gridwidth: 2,
+      linecolor: '#bdbdbd',
+      tickfont: {
+        family: 'Arial',
+        size: 14,
+        color: '#bdbdbd'
+      }
+    },
+    yaxis: {
+      showgrid: true,
+      showline: true,
+      gridcolor: '#bdbdbd',
+      gridwidth: 2,
+      linecolor: '#bdbdbd',
+      tickfont: {
+        family: 'Arials',
+        size: 14,
+        color: '#bdbdbd'
+      }
+    }
+  };
+  lineMainLayout.push(data);
+  lineMainLayout.push(layout);
+  return(lineMainLayout);
 }
 
 // Setting up the legend
