@@ -177,16 +177,11 @@ function borderInfo(feature, layer) {
 }
 
 function passCountryId(country) {
-
+  var mainLayout = [];
   var countryId = country.id;
   d3.json("/gini/"+countryId, function(data){
     console.log(data);
-  });
-  var countryName = country.properties.name;
-  var mainLayout = [];
-  console.log(countryName);
-  console.log(countryId);
-  var data = [{
+    var data = [{
   values: [19, 26, 55],
   labels: ['Residential', 'Non-Residential', 'Utility'],
   type: 'pie',
@@ -239,6 +234,10 @@ function passCountryId(country) {
   };
   mainLayout.push(data);
   mainLayout.push(layout);
+  });
+  var countryName = country.properties.name;
+  console.log(countryName);
+  console.log(countryId);
   return(mainLayout);
 }
 
