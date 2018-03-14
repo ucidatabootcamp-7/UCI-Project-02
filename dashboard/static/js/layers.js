@@ -153,15 +153,93 @@ d3.json(borderslink, function(data) {
       color: "#fff",
       weight: 1,
       fillOpacity: 0.8
-    },
+    }
     }).addTo(map);
     controlLayers.addOverlay(bordersLayer, 'Country Borders');
-
 });
 
 function borderInfo(feature, layer) {
+    layer.on({
+      click: function(event) {
+          map.fitBounds(event.target.getBounds());
+          // Pass the country code over to a function
+          //console.log(event.target.feature.id)
+          console.log(event.target.feature);
+          var test = passCountryId(event.target.feature);
+          data = test[0];
+          layout = test[1];
+          
+          Plotly.newPlot('pie-chart', data, layout);
+        }
+      });
     layer.bindPopup("<h3 class='infoHeader'>Country:</h1> \
 <p class='plate'>" + feature.properties.name + "</p>");
+}
+
+function passCountryId(country) {
+
+  var countryId = country.id;
+  d3.json("/gini/"+countryId, function(data){
+    console.log(data);
+  });
+  var countryName = country.properties.name;
+  var mainLayout = [];
+  console.log(countryName);
+  console.log(countryId);
+  var data = [{
+  values: [19, 26, 55],
+  labels: ['Residential', 'Non-Residential', 'Utility'],
+  type: 'pie',
+    textfont: {
+        family: 'Arial',
+        size: 14,
+        color: 'rgb(255, 255, 255)'
+    }
+  }];
+
+  var layout = {
+    legend:{
+      x:20,
+      y:0,
+      font:{
+        family: "Arial",
+        size: 14,
+        color:'rgb(255, 255, 255)'
+      }
+    },
+    annotations:[
+      {
+      xref: 'paper',
+      yref: 'paper',
+      x: 0.0,
+      y: 0.9,
+      xanchor: 'left',
+      yanchor: 'bottom',
+      text: `${countryId} GDP Composition`,
+      font:{
+          family: 'Arial',
+          size: 16,
+          color: 'rgb(255, 255, 255)'
+      },
+      showarrow: false
+      }
+    ],
+      autosize: false,
+    width: 400,
+    height: 300,
+    paper_bgcolor: '#1a1a1a',
+    plot_bgcolor: '#1a1a1a',
+    margin: {
+      l: 50,
+      r: 50,
+      b: 10,
+      t: 10,
+      pad: 1
+    }
+  };
+  mainLayout.push(data);
+  mainLayout.push(layout);
+  return(mainLayout);
 }
 
 // add plate layer
