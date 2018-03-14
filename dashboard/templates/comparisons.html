@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>World Economic Data</title>
+	<title>Scatter Plot Comparison</title>
 	
 	<!-- Our CSS -->
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
@@ -22,7 +22,8 @@
 	crossorigin=""></script>
 
 	<!--D3 cdn-->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	
 	<!-- Plotly cdn -->
@@ -69,41 +70,24 @@
 <!-- END OF NAVBAR -->
 	
 </head>
-<body style="background-color:#1a1a1a">
+<body>
 	<!-- BUILD THE CONTAINERS - TWO ROWS x TWO COLUMNS -->
 
 <!-- Map Element 
 ================================================= -->
 
 <div class="map-container">  
-    <div class="row" style="padding-top: 5px;">
-        <div class="col-md-8" style="padding-top:2px; padding-right: 0px;">  
-            <div id="map"></div>
-        </div>
-        <div class="row">
-			<div class="col-md-4" style="border: 1px solid black;">
-				<!-- <img src="../static/images/scatterPlotExample.jpg" alt="Scatter Plot Placeholder"> -->
-				<!--<div id="bar-plot"></div>-->
-				<div id="pie-chart"></div>
+    
+		<div class="row">
+		<div class="col-md-12" style="border: 1px solid black;">
+			<div class="chart">
 			</div>
-			<div class="col-md-4" style="border: 1px solid black;">
-				<!--<img src="../static/images/scatterPlotExample.jpg" alt="Scatter Plot Placeholder">-->
-				<div id="line-chart"></div>
-			</div>
-		</div>
-    </div>
-</div>
-
-<!--
-	<div id="map-container">	
-		<div id="map">
+			<p>This scatter plot shows the correlation for each country between GDP_PPP and HDI and Life Expectancy. This interactive scatter plot has two x-axis options for HDI and Life Expectancy. Something about the correlation</p>	
 		</div>
 	</div>
--->	
+    </div>
+</div>
 	<!-- Our JS -->
-	<script type="text/javascript" src="../static/js/layers.js"></script>
-	<!--<script type="text/javascript" src="../static/js/bar.js"></script>-->
-	<!--<script type="text/javascript" src="../static/js/pie.js"></script>-->
-	<!--<script type="text/javascript" src="../static/js/line.js"></script>-->
+	<script type="text/javascript" src="../static/js/lorenzo_scatter.js"></script>
 </body>
 </html>
