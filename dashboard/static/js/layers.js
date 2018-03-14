@@ -1,8 +1,15 @@
 // Create map object 
 var map = L.map("map", {
     center: [20, 40],
-    zoom: 2
-
+    zoom: 2,
+    minZoom: 2,
+    maxZoom: 10,
+    maxBounds: [
+        //south west
+        [-84, 180],
+        //north east
+        [84, -180]
+        ], 
 });
 
 // add api key to variable 
@@ -12,12 +19,12 @@ var apiKey = "access_token=pk.eyJ1IjoiYWJmZGF0YSIsImEiOiJjamU2aHlrZTgwMGdxMzNxa3
 L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?" + apiKey).addTo(map);
 
 // Outdoors - default map
-var outdoors = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?" + apiKey, 
-{id: 'map'});
+//var outdoors = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?" + apiKey, 
+//{id: 'map'});
 
 // Satellite map
-var satellite = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?" + apiKey,
-{id: 'map'});
+//var satellite = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?" + apiKey,
+//{id: 'map'});
 
 // Dark map - default map
 var dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?" + apiKey,
@@ -26,8 +33,8 @@ var dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/25
 // dark.addTo(map);
 
 var baseMaps = {
-    "Outdoors": outdoors,
-    "Satellite": satellite,
+//    "Outdoors": outdoors,
+//    "Satellite": satellite,
     "Dark": dark
 };
 
@@ -71,8 +78,7 @@ function borderInfo(feature, layer) {
           Plotly.newPlot('line-chart', lineChart[0], lineChart[1]);
         }
       });
-    layer.bindPopup("<h3 class='infoHeader'>Country:</h1> \
-<p class='plate'>" + feature.properties.name + "</p>");
+    layer.bindPopup("<p class='plate'>" + feature.properties.name + "</p>");
 }
 
 function createPieChart(country) {
