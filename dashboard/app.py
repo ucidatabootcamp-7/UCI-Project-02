@@ -51,6 +51,12 @@ app = Flask(__name__, static_folder="static")
 def home():
     return render_template("index.html")
 
+# first route returns to the dashboard home page
+@app.route("/comparisons")
+def comparisonsPage():
+    return render_template("comparisons.html")
+
+
 # second route returns a list of IsoCode = Country Code    
 @app.route("/iso")
 def iso():
