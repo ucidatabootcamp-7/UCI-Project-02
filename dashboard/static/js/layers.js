@@ -67,13 +67,21 @@ d3.json(borderslink, function(data) {
 
 // CHOROPLETH SECTION
 
-var geojson;
+var choro;
+
+// create var to read gini data
+var giniData = d3.json("/gini", function(err, data) {
+  if (err) throw err;
+  
+  console.log(data);
+
+});
 
 // Grabbing data with d3...
 d3.json(borderslink, function(data) {
 
   // Creating a new choropleth layer
-  geojson = L.choropleth(data, {
+  choro = L.choropleth(data, {
     // Which property in the features to use
     valueProperty: "name",
     // Color scale
@@ -93,13 +101,43 @@ d3.json(borderslink, function(data) {
       layer.bindPopup("<p class='plate'>" + feature.properties.name + "</p>");
     }
   }).addTo(map);
+  
+  // add controlLayers for Choropleth
+  controlLayers.addOverlay(choro, 'Gini')
+
+  // style 
+
+  function getColor(giniData) {
+    return giniData > 90 ? '#800026' :
+      giniData > 80 ? '#BD0026' :
+        giniData > 70 ? '#E31A1C' :
+          giniData > 50 ? '#FC4E2A' :
+            giniData > 30 ? '#FD8D3C' :
+              giniData > 10 ? '#FEB24C' :
+                giniData > 0 ? '#FED976' :
+                  '#FFEDA0';
+  }
+
+  function style() {
+    return {
+        fillColor: getColor(giniData),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        fillOpacity: 0.7
+    };
+}
+
+L.geoJson(data, {style: style}).addTo(map);
+
+
 
   // Setting up the legend
   var legend = L.control({ position: "bottomright" });
   legend.onAdd = function() {
     var div = L.DomUtil.create("div", "info legend");
-    var limits = geojson.options.limits;
-    var colors = geojson.options.colors;
+    var limits = choro.options.limits;
+    var colors = choro.options.colors;
     var labels = [];
 
     // Add min & max

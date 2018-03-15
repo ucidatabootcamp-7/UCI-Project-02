@@ -96,3 +96,60 @@ html {
     font: 8px;
   }
   
+
+  /* CSS for Lorenzo Scatter Plot */
+
+  /* .tooltip {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    padding: 2px;
+    padding-top: 8px;
+    font: 12px sans-serif;
+    color: white;
+    text-align: ceter;
+    background: #000000;
+    border: 1px;
+    border-radius: 12px;
+    pointer-events: none;
+  } */
+
+  .tooltip {
+    background-color: #000000; 
+    color: #FFFFFF; 
+    border: 1px solid #FFFFFF; 
+    padding: 10px;
+    font-size: 20px;
+    pointer-events: none;
+  }
+  
+  .axis-text {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: small;
+    fill: #000000;
+    text-anchor: middle;
+    padding: 10px;
+  }
+  
+  .active {
+    font-weight: bold;
+    font-size: small;
+    fill: #000;
+    fill: #000000;
+    transition: fill 0.3s ease-out;
+    text-anchor: middle;
+  }
+  
+  .inactive {
+    font-weight: lighter;
+    font-size: small;
+    fill: #000000;
+    transition: fill 0.3s ease-out;
+    text-anchor: middle;
+  }
+  
+  .inactive:hover {
+    fill: #FF0000;
+    cursor: pointer;
+  }

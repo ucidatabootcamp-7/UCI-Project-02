@@ -118,7 +118,7 @@ d3.json("/metadata", function(err, worldData) {
     .attr("cy", function(data, index) {
       return yLinearScale(data.GDP_PPP);
     })
-    .attr("r", "10")
+    .attr("r", "5")
     .attr("fill", "#1a7916")
     // display tooltip on click
     .on("click", function(data) {

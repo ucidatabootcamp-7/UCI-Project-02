@@ -129,6 +129,19 @@ def gini_func():
     return jsonify(results_list)
 
 
+# new route returns iso & gini
+@app.route("/iso_gini")
+def iso_gini_func():
+    """Return the MetaData for a given country"""
+    sel = [WorldDev.IsoCode, WorldDev.GiniCoefficient]
+    
+    # s = select([WorldDev.CountryName, WorldDev.GDP_PPP,WorldDev.HDI, WorldDev.LifeExpectancy])
+    # results = conn.execute(s)
+    results = session.query(*sel).all()
+    result_dict = [u._asdict() for u in results]
+    return jsonify(result_dict)
+
+
 # Allows us to filter gini by country
 @app.route('/gini/<country>')
 def gini_country(country):
