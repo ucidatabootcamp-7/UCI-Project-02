@@ -56,6 +56,11 @@ def home():
 def comparisonsPage():
     return render_template("comparisons.html")
 
+# route returns the table page
+@app.route("/table")
+def table():
+    return render_template("table.html")
+
 
 # second route returns a list of IsoCode = Country Code    
 @app.route("/iso")
@@ -78,6 +83,24 @@ def metadata():
     sel = [WorldDev.CountryName,
            WorldDev.HDI, WorldDev.LifeExpectancy, 
            WorldDev.GDP_PPP]
+    
+    # s = select([WorldDev.CountryName, WorldDev.GDP_PPP,WorldDev.HDI, WorldDev.LifeExpectancy])
+    # results = conn.execute(s)
+    results = session.query(*sel).all()
+    result_dict = [u._asdict() for u in results]
+    return jsonify(result_dict)
+
+# table metadata
+@app.route('/table_data')
+def table_data():
+    """Return the MetaData for a our dynamic table"""
+    sel = sel = [WorldDev.IsoCode, WorldDev.CountryName,
+           WorldDev.GiniCoefficient, WorldDev.HomicidePer100k,
+           WorldDev.HDI, WorldDev.GDP_Mean,
+           WorldDev.LifeExpectancy, WorldDev.services2015,
+           WorldDev.industry2015, WorldDev.agriculture2015,
+           WorldDev.GDP_PPP, WorldDev.Unemployment2015,
+           WorldDev.Unemployment2016, WorldDev.Unemployment2017]
     
     # s = select([WorldDev.CountryName, WorldDev.GDP_PPP,WorldDev.HDI, WorldDev.LifeExpectancy])
     # results = conn.execute(s)
