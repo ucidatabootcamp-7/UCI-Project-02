@@ -100,7 +100,7 @@ d3.json(choroLink, function(data) {
       layer.bindPopup("<h1 class='infoHeader'>World Development Data</h1> \
     <p class='description'>" + "Country: " + feature.properties.CountryName + "</p>\
     <p class='description'>" + "Gini Coefficient: " + feature.properties.GiniCoefficient + "</p>\
-    <p class='description'>" + "GDP PPP: " + feature.properties.GDP_PPP + "</p>\
+    <p class='description'>" + "GDP PPP: " + "$" + feature.properties.GDP_PPP + "</p>\
     <p class='description'>" + "Life Expectancy: " + feature.properties.LifeExpectancy + "</p>\
     <p class='description'>" + "Homicide Per 100K: " + feature.properties.HomicidePer100k + "</p>");
         
