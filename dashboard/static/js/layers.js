@@ -69,7 +69,7 @@ d3.json(borderslink, function(data) {
 
 var geojson;
 
-var choroLink = "https://raw.githubusercontent.com/ABFdata/Homework/master/geoJSON/borderGini.json"
+var choroLink = "https://raw.githubusercontent.com/ABFdata/Homework/master/geoJSON/border_world_dev.json"
 
 // Grabbing data with d3...
 d3.json(choroLink, function(data) {
@@ -91,9 +91,23 @@ d3.json(choroLink, function(data) {
       fillOpacity: 0.8
     },
     // Binding a pop-up to each layer
+    // onEachFeature: function(feature, layer) {
+    //   layer.bindPopup("<h1>feature.properties.CountryName </h1>" + "<br> Gini Coefficient:<br>" + feature.properties.GiniCoefficient
+    // + "<br>GDP PPP<br>" + feature.properties.GDP_PPP);
+    // }
+
     onEachFeature: function(feature, layer) {
-      layer.bindPopup(feature.properties.CountryName + "<br> Gini Coefficient:<br>" + feature.properties.GiniCoefficient);
-    }
+      layer.bindPopup("<h1 class='infoHeader'>World Development Data</h1> \
+    <p class='description'>" + "Country: " + feature.properties.CountryName + "</p>\
+    <p class='description'>" + "Gini Coefficient: " + feature.properties.GiniCoefficient + "</p>\
+    <p class='description'>" + "GDP PPP: " + feature.properties.GDP_PPP + "</p>\
+    <p class='description'>" + "Life Expectancy: " + feature.properties.LifeExpectancy + "</p>\
+    <p class='description'>" + "Homicide Per 100K: " + feature.properties.HomicidePer100k + "</p>");
+        
+}
+
+
+
   }).addTo(map);
   
   // add controlLayers for Choropleth
