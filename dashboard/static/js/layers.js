@@ -185,16 +185,29 @@ function borderInfo(feature, layer) {
       });
     layer.bindPopup("<p class='plate'>" + feature.properties.name + "</p>");
 }
-
 function createPieChart(country) {
   var countryId = country.id;
   var countryName = country.properties.name;
+  var data;
+  var layout;
+  var ag = 0.00;
+  //var ser = 0.00;
+  //var ind = 0.00;
   var pieMainLayout = [];
-  console.log(countryName);
-  console.log(countryId);
+  d3.json(`/metadata/${countryId}`, function(error, countryData){
+    ag += countryData.agriculture2015;
+    //ser += countryData.services2015;
+    //console.log(countryData.services2015);
+    //ind += countryData.industry2015;
+    //console.log(countryData.agriculture2015);
+  });
+  //console.log(countryName);
+  console.log(ag);
+  //console.log(ser);
+  //console.log(ind);
   var data = [{
-  values: [19, 26, 55],
-  labels: ['Residential', 'Non-Residential', 'Utility'],
+  values: [ag,55,22],
+  labels: ['Agriculture', 'Services', 'Industry'],
   type: 'pie',
     textfont: {
         family: 'Arial',
