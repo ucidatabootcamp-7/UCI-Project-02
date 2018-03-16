@@ -65,6 +65,111 @@ d3.json(borderslink, function(data) {
     controlLayers.addOverlay(bordersLayer, 'Country Borders');
 });
 
+// CHOROPLETH SECTION
+
+var choro;
+
+// create var to read gini data
+var giniData = d3.json("/gini", function(err, data) {
+  if (err) throw err;
+  
+  console.log(data);
+
+});
+
+// Grabbing data with d3...
+d3.json(borderslink, function(data) {
+
+  // Creating a new choropleth layer
+  choro = L.choropleth(data, {
+    // Which property in the features to use
+    valueProperty: "name",
+    // Color scale
+    scale: ["#ffffb2", "#b10026"],
+    // Number of breaks in step range
+    steps: 10,
+    // q for quantile, e for equidistant, k for k-means
+    mode: "q",
+    style: {
+      // Border color
+      color: "#fff",
+      weight: 1,
+      fillOpacity: 0.8
+    },
+    // Binding a pop-up to each layer
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup("<p class='plate'>" + feature.properties.name + "</p>");
+    }
+  }).addTo(map);
+  
+  // add controlLayers for Choropleth
+  controlLayers.addOverlay(choro, 'Gini')
+
+  // style 
+
+  function getColor(giniData) {
+    return giniData > 90 ? '#800026' :
+      giniData > 80 ? '#BD0026' :
+        giniData > 70 ? '#E31A1C' :
+          giniData > 50 ? '#FC4E2A' :
+            giniData > 30 ? '#FD8D3C' :
+              giniData > 10 ? '#FEB24C' :
+                giniData > 0 ? '#FED976' :
+                  '#FFEDA0';
+  }
+
+  function style() {
+    return {
+        fillColor: getColor(giniData),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        fillOpacity: 0.7
+    };
+}
+
+L.geoJson(data, {style: style}).addTo(map);
+
+
+
+  // Setting up the legend
+  var legend = L.control({ position: "bottomright" });
+  legend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    var limits = choro.options.limits;
+    var colors = choro.options.colors;
+    var labels = [];
+
+    // Add min & max
+    var legendInfo = "<h3>Gini Coefficient</h3>" +
+      "<div class=\"labels\">" +
+        "<div class=\"min\">" + limits[0] + "</div>" +
+        "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+      "</div>";
+
+    div.innerHTML = legendInfo;
+
+    limits.forEach(function(limit, index) {
+      labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+    });
+
+    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+    return div;
+  };
+
+  // Adding legend to the map
+  legend.addTo(map);
+
+});
+
+
+
+
+// END CHOROPLETH SECTION
+
+
+
+
 function borderInfo(feature, layer) {
     layer.on({
       click: function(event) {
