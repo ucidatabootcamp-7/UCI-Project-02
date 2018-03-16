@@ -54,29 +54,29 @@ d3.json("/metadata", function(err, worldData) {
   var yMax;
 
   // This function identifies the minimum and maximum values to define axises
-  function findMinAndMax(dataColumnY) {
-    yMin = d3.min(worldData, function(data) {
-      return +data[dataColumnY] * 0.8;
-    });
-
-    yMax = d3.max(worldData, function(data) {
-      return +data[dataColumnY] * 1.1;
+  function findMinAndMax(dataColumnX) {
+    xMin = d3.min(worldData, function(data) {
+      return +data[dataColumnX] * 0.8;
     });
 
     xMax = d3.max(worldData, function(data) {
+      return +data[dataColumnX] * 1.1;
+    });
+
+    yMax = d3.max(worldData, function(data) {
       return +data.GDP_PPP * 1.1;
     });
   }
 
-  // Default y-axis is 'HDI'
-  var currentAxisLabelY = "HDI";
+  // Default x-axis is 'HDI'
+  var currentAxisLabelX = "HDI";
 
   // Call findMinAndMax() with 'HDI' as default
-  findMinAndMax(currentAxisLabelY);
+  findMinAndMax(currentAxisLabelX);
 
   // Set the domain of an axis to extend from the min to the max value
-  yLinearScale.domain([yMin, yMax]);
-  xLinearScale.domain([0, xMax]);
+  xLinearScale.domain([xMin, xMax]);
+  yLinearScale.domain([0, yMax]);
 
   // Initialize tooltip
   var toolTip = d3
@@ -87,10 +87,10 @@ d3.json("/metadata", function(err, worldData) {
     .html(function(data) {
       var CountryName = data.CountryName;
       var gdpPPP = +data.GDP_PPP;
-      var worldInfo = +data[currentAxisLabelY];
+      var worldInfo = +data[currentAxisLabelX];
       var world_dev_info;
       // Tooltip text depends on which axis is active/has been clicked
-      if (currentAxisLabelY === "HDI") {
+      if (currentAxisLabelX === "HDI") {
         world_dev_info = "Human Development Indicator: ";
       }
       else {  
@@ -112,11 +112,11 @@ d3.json("/metadata", function(err, worldData) {
     .data(worldData)
     .enter()
     .append("circle")
-    .attr("cy", function(data, index) {
-      return xLinearScale(data.GDP_PPP);
-    })
     .attr("cx", function(data, index) {
-      return yLinearScale(+data[currentAxisLabelY]);
+      return xLinearScale(+data[currentAxisLabelX]);
+    })
+    .attr("cy", function(data, index) {
+      return yLinearScale(data.GDP_PPP);
     })
     .attr("r", "5")
     .attr("fill", "#1a7916")
@@ -139,7 +139,7 @@ d3.json("/metadata", function(err, worldData) {
   // Append a group for y-axis, then display it
   chart.append("g").call(leftAxis);
 
-  // Append x-axis label
+  // Append y-axis label
   chart
     .append("text")
     .attr("transform", "rotate(-90)")
