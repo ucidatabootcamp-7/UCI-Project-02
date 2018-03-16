@@ -118,7 +118,7 @@ d3.json("/metadata", function(err, worldData) {
     .attr("cx", function(data, index) {
       return yLinearScale(+data[currentAxisLabelY]);
     })
-    .attr("r", "10")
+    .attr("r", "5")
     .attr("fill", "#1a7916")
     // display tooltip on click
     .on("click", function(data) {
