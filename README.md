@@ -9,6 +9,9 @@
 * Lorenzo Yniguez
 <hr>
 
+![title](images/choropleth.png)
+<hr>
+
 ### Objective
 
 Our goal for this project is to make an interactive dashboard that displays world development data pulled from the following sources:
