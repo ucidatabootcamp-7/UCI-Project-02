@@ -1,13 +1,13 @@
-// Create map object 
+// Create map object and specify zoom, center, min/max zoom, and max bounds
 var map = L.map("map", {
     center: [20, 40],
     zoom: 2,
     minZoom: 2,
     maxZoom: 10,
     maxBounds: [
-        //south west
+        // Set the maximum boundry to the south west
         [-84, 180],
-        //north east
+        // Set the maximum boundry to the north east
         [84, -180]
         ], 
 });
