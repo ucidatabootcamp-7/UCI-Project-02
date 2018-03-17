@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Scatter Plot Comparison</title>
+	<title>Life Expectancy Chart</title>
 	
 	<!-- Our CSS -->
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/compstyle.css"/>
 	
 	<!-- Bootstrap css -->
 	
@@ -55,38 +55,38 @@
                         	<li><a href="/country" target="_blank">Country JSON</a></li>
                         	<li><a href="/metadata" target="_blank">Meta Data JSON</a></li>
                         	<li><a href="/homicides_per_100k" target="_blank">Homicides JSON</a></li>
-
                         	<li><a href="/hdi" target="_blank">HDI JSON</a></li>
                         	<li><a href="/gdp_mean" target="_blank">Mean GDP JSON</a></li>
                         </ul>
                       </li>
-			<li><a href="#">Scatter Plot</a></li>
-			<li><a href="/table">Data Table</a></li>
+                      <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Comparison Charts<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/comparisons">Quality of Life</a></li>
+							<li><a href="/ginigdp">Gini and GDP v Homicides</a></li>
+						</ul>
+			</li>
+			<li><a href="/table" target="_blank">Data Table</a></li>
 		  <li><a href="https://github.com/ucidatabootcamp-7/UCI-Project-02" target="_blank">GitHub</a></li>
         </ul>
       </div>
     </div>
   </div>
-	
 <!-- END OF NAVBAR -->
-	
 </head>
 <body>
-	<!-- BUILD THE CONTAINERS - TWO ROWS x TWO COLUMNS -->
-
-<!-- Map Element 
-================================================= -->
-
+<!-- Map Stuff Here -->
 <div class="map-container">  
-    
-		<div class="row">
+	<div class="row">
+		<br><br><br>
+				<h4 style="text-align:center;">This scatter plot shows the correlation for each country between GDP_PPP and HDI and Life Expectancy.</h4>
+				<h4 style="text-align:center;">This interactive scatter plot has two x-axis options for HDI and Life Expectancy.</h4>
 		<div class="col-md-12" style="border: 1px solid black;">
-			<div class="chart">
-			</div>
-			<p>This scatter plot shows the correlation for each country between GDP_PPP and HDI and Life Expectancy. This interactive scatter plot has two x-axis options for HDI and Life Expectancy. Something about the correlation</p>	
+					
+			<div class="chart"></div>
+			
 		</div>
 	</div>
-    </div>
 </div>
 	<!-- Our JS -->
 	<script type="text/javascript" src="../static/js/lorenzo_scatter.js"></script>
