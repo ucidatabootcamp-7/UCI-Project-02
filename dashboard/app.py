@@ -56,6 +56,12 @@ def home():
 def comparisonsPage():
     return render_template("comparisons.html")
 
+
+# route returns the ginigdp page
+@app.route("/ginigdp")
+def giniGDPpage():
+    return render_template("ginigdp.html")
+
 # route returns the table page
 @app.route("/table")
 def table():
