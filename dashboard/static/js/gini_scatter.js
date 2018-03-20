@@ -19,7 +19,7 @@ var svg = d3
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Append SVG group
-var chart = svg.append("g");
+var chart2 = svg.append("g");
 
 // Append a div to the body to create tooltips and assign it a class
 d3.select("chart")
@@ -107,9 +107,9 @@ d3.json("/metadata", function(err, worldData) {
     });
 
   // Create tooltip
-  chart.call(toolTip);
+  chart2.call(toolTip);
 
-  chart
+  chart2
     .selectAll("circle")
     .data(worldData)
     .enter()
@@ -132,17 +132,17 @@ d3.json("/metadata", function(err, worldData) {
     });
 
   // Append an SVG group for the x-axis, then display the x-axis
-  chart
+  chart2
     .append("g")
     .attr("transform", "translate(0," + height + ")")
     .attr("class", "x-axis")
     .call(bottomAxis);
 
   // Append a group for y-axis, then display it
-  chart.append("g").call(leftAxis);
+  chart2.append("g").call(leftAxis);
 
   // Append y-axis label
-  chart
+  chart2
     .append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left + 40)
@@ -153,7 +153,7 @@ d3.json("/metadata", function(err, worldData) {
     .text("Homicides Per 100K");
 
   // Append x-axis labels
-  chart
+  chart2
     .append("text")
     .attr(
       "transform",
@@ -164,7 +164,7 @@ d3.json("/metadata", function(err, worldData) {
     .attr("data-axis-name", "GiniCoefficient")
     .text("Income Inequality vs. Homicide Rate");
 
-  chart
+  chart2
     .append("text")
     .attr(
       "transform",

@@ -88,7 +88,8 @@ def metadata():
     """Return the MetaData for a given country"""
     sel = [WorldDev.CountryName,
            WorldDev.HDI, WorldDev.LifeExpectancy, 
-           WorldDev.GDP_PPP]
+           WorldDev.GDP_PPP, WorldDev.GiniCoefficient, WorldDev.HomicidePer100k, 
+           WorldDev.Unemployment2015]
     
     # s = select([WorldDev.CountryName, WorldDev.GDP_PPP,WorldDev.HDI, WorldDev.LifeExpectancy])
     # results = conn.execute(s)
